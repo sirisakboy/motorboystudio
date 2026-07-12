@@ -13,7 +13,10 @@
 
   /* Effects */
   --glow-status: 0 0 8px rgba(0, 210, 106, 0.6);
-  --transition: all 0.2s ease-in-out;
+  /* Animation Timing: 120-180ms, Ease-In-Out */
+  --transition-speed: 150ms;
+  --transition-ease: ease-in-out;
+  --transition: all var(--transition-speed) var(--transition-ease);
 }
 
 body {
@@ -21,8 +24,30 @@ body {
   padding: 0;
   background-color: var(--bg-carbon);
   color: var(--text-main);
-  font-family: 'Consolas', 'Monaco', monospace;
+  font-family: 'Inter', sans-serif;
   overflow: hidden;
+}
+
+/* Typography for Data */
+code, .data-font {
+    font-family: 'Consolas', 'Monaco', monospace;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-carbon);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-titanium);
+  border-radius: 4px;
+  transition: var(--transition);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-dim);
 }
 
 /* Layout Grid */
@@ -46,10 +71,16 @@ body {
   background-color: var(--panel-graphite);
   padding: 10px;
   overflow: auto;
+  transition: var(--transition);
+}
+
+/* Hover Effects */
+.panel:hover {
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
 }
 
 header { grid-area: header; background-color: var(--panel-graphite); padding: 10px; border-bottom: 2px solid var(--accent-racing-red); display: flex; justify-content: space-between; align-items: center; }
-.menu-bar { grid-area: menu; background-color: var(--panel-graphite); padding: 5px 10px; }
+.menu-bar { grid-area: menu; background-color: var(--panel-graphite); padding: 5px 10px; font-size: 0.9em; }
 .toolbar { grid-area: toolbar; background-color: var(--panel-graphite); padding: 5px 10px; display: flex; gap: 5px; }
 .sidebar { grid-area: sidebar; background-color: var(--panel-graphite); }
 main { grid-area: main; background-color: var(--panel-graphite); display: flex; flex-direction: column; }
@@ -65,6 +96,7 @@ footer { grid-area: statusbar; background-color: var(--panel-graphite); padding:
   background: var(--accent-racing-red);
   display: inline-block;
   margin-right: 5px;
+  transition: var(--transition);
 }
 .status-led.active {
   background: var(--success-lime-green);
@@ -88,4 +120,21 @@ footer { grid-area: statusbar; background-color: var(--panel-graphite); padding:
 }
 .tab.active {
     border-top: 2px solid var(--accent-racing-red);
+}
+
+/* Toolbar Buttons */
+button {
+    background: var(--panel-graphite);
+    color: var(--text-main);
+    border: 1px solid var(--border-titanium);
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+button:hover {
+    background: var(--border-titanium);
+    border-color: var(--text-dim);
 }
