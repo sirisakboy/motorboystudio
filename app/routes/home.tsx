@@ -3,6 +3,7 @@ import { FolderOpen, Save, ScanSearch, Zap, FileText, Database, GitBranch, Cpu, 
 import { useState } from 'react';
 import '../../src/styles/index.css';
 import '../../src/styles/theme.css';
+import { Heatmap } from '../../src/components/workspace/Heatmap';
 
 export function meta({}: Route.MetaArgs) {
         return [
@@ -22,6 +23,7 @@ export default function Home() {
   });
 
   const [logs, setLogs] = useState(['System Ready.', 'Project Loaded: motorboy.bin']);
+  const [activeTab, setActiveTab] = useState('Heatmap');
 
   const simulateInspection = () => {
     const newVal = Math.floor(Math.random() * 0xFFFF).toString(16).toUpperCase();
@@ -64,13 +66,13 @@ export default function Home() {
       
       <main>
         <div className="tab-container">
-          <div className="tab active">Heatmap</div>
-          <div className="tab">Hex</div>
-          <div className="tab">2D Map</div>
-          <div className="tab">3D View</div>
+          <div className={`tab ${activeTab === 'Heatmap' ? 'active' : ''}`} onClick={() => setActiveTab('Heatmap')}>Heatmap</div>
+          <div className={`tab ${activeTab === 'Hex' ? 'active' : ''}`} onClick={() => setActiveTab('Hex')}>Hex</div>
+          <div className={`tab ${activeTab === '2D Map' ? 'active' : ''}`} onClick={() => setActiveTab('2D Map')}>2D Map</div>
+          <div className={`tab ${activeTab === '3D View' ? 'active' : ''}`} onClick={() => setActiveTab('3D View')}>3D View</div>
         </div>
-        <div className="panel flex-1 flex flex-col items-center justify-center data-font text-dim" onClick={simulateInspection}>
-            Workspace (Click toolbar to inspect)
+        <div className="panel flex-1 overflow-hidden" onClick={simulateInspection}>
+            {activeTab === 'Heatmap' ? <Heatmap /> : <div className="data-font text-dim text-center mt-20">Visualization: {activeTab}</div>}
         </div>
       </main>
       
