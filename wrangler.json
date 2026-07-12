@@ -10,13 +10,5 @@
         "upload_source_maps": true,
         "vars": {
                 "VALUE_FROM_CLOUDFLARE": "Hello from Cloudflare"
-        },
-        "env": {
-          "production": {
-            "name": "motorboystudio"
-          },
-          "preview": {
-            "name": "motorboystudio-preview"
-          }
         }
 }
