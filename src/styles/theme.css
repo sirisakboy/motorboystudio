@@ -1,0 +1,91 @@
+:root {
+  /* Colors */
+  --bg-carbon: #111318;
+  --panel-graphite: #1B1F27;
+  --border-titanium: #2A2F39;
+  
+  --accent-racing-red: #E10600;
+  --secondary-electric-blue: #00AEEF;
+  --success-lime-green: #00D26A;
+
+  --text-main: #ECECEC;
+  --text-dim: #A0A0A0;
+
+  /* Effects */
+  --glow-status: 0 0 8px rgba(0, 210, 106, 0.6);
+  --transition: all 0.2s ease-in-out;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg-carbon);
+  color: var(--text-main);
+  font-family: 'Consolas', 'Monaco', monospace;
+  overflow: hidden;
+}
+
+/* Layout Grid */
+.app-container {
+  display: grid;
+  height: 100vh;
+  grid-template-areas:
+      "header header header"
+      "menu menu menu"
+      "toolbar toolbar toolbar"
+      "sidebar main inspector"
+      "console console console"
+      "statusbar statusbar statusbar";
+  grid-template-columns: 200px 1fr 250px;
+  grid-template-rows: auto auto auto 1fr 150px 30px;
+  gap: 2px;
+  background-color: var(--border-titanium);
+}
+
+.panel {
+  background-color: var(--panel-graphite);
+  padding: 10px;
+  overflow: auto;
+}
+
+header { grid-area: header; background-color: var(--panel-graphite); padding: 10px; border-bottom: 2px solid var(--accent-racing-red); display: flex; justify-content: space-between; align-items: center; }
+.menu-bar { grid-area: menu; background-color: var(--panel-graphite); padding: 5px 10px; }
+.toolbar { grid-area: toolbar; background-color: var(--panel-graphite); padding: 5px 10px; display: flex; gap: 5px; }
+.sidebar { grid-area: sidebar; background-color: var(--panel-graphite); }
+main { grid-area: main; background-color: var(--panel-graphite); display: flex; flex-direction: column; }
+.inspector { grid-area: inspector; background-color: var(--panel-graphite); }
+.console { grid-area: console; background-color: var(--panel-graphite); }
+footer { grid-area: statusbar; background-color: var(--panel-graphite); padding: 5px 10px; font-size: 0.8em; display: flex; justify-content: space-between; align-items: center; }
+
+/* Components */
+.status-led {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-racing-red);
+  display: inline-block;
+  margin-right: 5px;
+}
+.status-led.active {
+  background: var(--success-lime-green);
+  box-shadow: var(--glow-status);
+}
+
+.tab-container {
+    display: flex;
+    gap: 2px;
+    background: var(--border-titanium);
+    border-bottom: 2px solid var(--border-titanium);
+}
+.tab {
+    background: var(--panel-graphite);
+    padding: 5px 15px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+.tab:hover {
+    background: var(--border-titanium);
+}
+.tab.active {
+    border-top: 2px solid var(--accent-racing-red);
+}
