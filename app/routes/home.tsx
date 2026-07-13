@@ -4,6 +4,7 @@ import '../../src/styles/index.css';
 import '../../src/styles/theme.css';
 import { AppShell } from '../../src/components/layout/AppShell';
 import { Heatmap } from '../../src/components/workspace/Heatmap';
+import { HexViewer } from '../../src/components/workspace/HexViewer';
 
 export function meta({}: Route.MetaArgs) {
         return [
@@ -29,6 +30,14 @@ export default function Home() {
     setInspectorData({ ...inspectorData, addr: `0x${newVal}` });
   };
 
+  const renderWorkspace = () => {
+    switch (activeTab) {
+        case 'Heatmap': return <Heatmap />;
+        case 'Hex': return <HexViewer />;
+        default: return <div className="data-font text-dim text-center mt-20">Visualization: {activeTab}</div>;
+    }
+  };
+
   return (
     <AppShell onSimulate={simulateInspection}>
       <main>
@@ -39,7 +48,7 @@ export default function Home() {
           <div className={`tab ${activeTab === '3D View' ? 'active' : ''}`} onClick={() => setActiveTab('3D View')}>3D View</div>
         </div>
         <div className="panel flex-1 overflow-hidden" onClick={simulateInspection}>
-            {activeTab === 'Heatmap' ? <Heatmap /> : <div className="data-font text-dim text-center mt-20">Visualization: {activeTab}</div>}
+            {renderWorkspace()}
         </div>
       </main>
       
