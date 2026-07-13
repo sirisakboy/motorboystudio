@@ -6,6 +6,7 @@ import { AppShell } from '../../src/components/layout/AppShell';
 import { Heatmap } from '../../src/components/workspace/Heatmap';
 import { HexViewer } from '../../src/components/workspace/HexViewer';
 import { SurfaceMap3D } from '../../src/components/workspace/SurfaceMap3D';
+import { Map2D } from '../../src/components/workspace/Map2D';
 
 export function meta({}: Route.MetaArgs) {
         return [
@@ -35,6 +36,7 @@ export default function Home() {
     switch (activeTab) {
         case 'Heatmap': return <Heatmap />;
         case 'Hex': return <HexViewer />;
+        case '2D Map': return <Map2D />;
         case '3D View': return <SurfaceMap3D />;
         default: return <div className="data-font text-dim text-center mt-20">Visualization: {activeTab}</div>;
     }
